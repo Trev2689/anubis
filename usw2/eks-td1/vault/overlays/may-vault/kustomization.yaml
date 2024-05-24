@@ -10,8 +10,9 @@ helmCharts:
     version: 0.1.0
     repo: https://github.com/Trev2689/anubis-resources.git
     valuesFile: common-values.yaml
-    releaseName: may-vault-anubis-resources
+    releaseName: anubis-resources
     namespace: may-vault
+
 
   - name: vault
     version: 0.27.0

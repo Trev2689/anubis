@@ -7,10 +7,13 @@ resources:
 
 helmCharts:
   - name: anubis-resources
-    repo: https://raw.githubusercontent.com/Trev2689/anubis-resources
+    version: 0.1.0  # Replace <version> with the version you want to install
+    repo: https://trev2689.github.io/helm-charts/
     valuesFile: common-values.yaml
     releaseName: june-vault-anubis-resources
-    namespace: june-vault
+    namespace: june-vault  # Specify the namespace where you want to install the chart
+  
+
 
   - name: vault
     version: 0.27.0

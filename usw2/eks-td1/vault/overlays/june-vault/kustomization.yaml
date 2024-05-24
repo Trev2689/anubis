@@ -7,7 +7,7 @@ resources:
 
 helmCharts:
   - name: anubis-resources
-    repo: https://github.com/Trev2689/anubis-resources/main
+    repo: https://raw.githubusercontent.com/Trev2689/anubis-resources/main
     valuesFile: common-values.yaml
     releaseName: june-vault-anubis-resources
     namespace: june-vault

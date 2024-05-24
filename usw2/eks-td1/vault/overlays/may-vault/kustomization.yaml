@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: may-vault
+
+resources:
+  - ../../base
+
+helmCharts:
+  - name: anubis-resources
+    version: 0.1.0
+    repo: https://github.com/Trev2689/anubis-resources.git
+    valuesFile: common-values.yaml
+    releaseName: may-vault-anubis-resources
+    namespace: may-vault
+
+  - name: vault
+    version: 0.27.0
+    repo: https://helm.releases.hashicorp.com
+    valuesFile: vault-values.yaml
+    releaseName: may
+    namespace: may-vault

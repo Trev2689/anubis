@@ -7,7 +7,7 @@ resources:
 
 helmCharts:
   - name: anubis-resources
-    repo:  ../../../../../../helm-charts/anubis-resources/
+    path:  ../../../../../../helm-charts/anubis-resources
     valuesFile: common-values.yaml
     releaseName: anubis-resources
     namespace: may-vault

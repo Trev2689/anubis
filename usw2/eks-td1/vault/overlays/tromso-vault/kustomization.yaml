@@ -10,9 +10,8 @@ helmCharts:
     version: 0.4.0  # Replace <version> with the version you want to install
     repo: https://trev2689.github.io/helm-charts/
     valuesFile: common-values.yaml
-    releaseName: tromso-vault-anubis-resources
+    releaseName: tromso-vault-anubis-resources-$(date +%s)
     namespace: june-vault  # Specify the namespace where you want to install the chart
-    directory: /charts/anubis-resources-$(date +%s)
   
 
 
@@ -22,4 +21,3 @@ helmCharts:
     valuesFile: vault-values.yaml
     releaseName: tromso
     namespace: tromso-vault
-    directory: /charts/vault-$(date +%s)

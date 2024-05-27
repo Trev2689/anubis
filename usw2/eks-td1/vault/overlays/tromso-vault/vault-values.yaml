@@ -12,7 +12,7 @@ server:
   volumes:
     - name: tls
       secret:
-        secretName: ${team}-tls
+        secretName: tromso-tls
     - name: bootstrap
       configMap:
         name: bootstrap
@@ -52,7 +52,7 @@ server:
       clusterIP: None 
   serviceAccount:
     annotations:
-      eks.amazonaws.com/role-arn: "${role_arn}"
+      eks.amazonaws.com/role-arn: "arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-tromso-vault-role"
   ha:
     enabled: true
     raft:
@@ -80,21 +80,21 @@ server:
         storage "raft" {
           path    = "/vault/data"
           retry_join {
-              leader_api_addr = "https://${team}-0.${team}-internal.${ns}.svc.cluster.local:8200"
+              leader_api_addr = "https://tromso-0.tromso-internal.tromso-vault.svc.cluster.local:8200"
               leader_ca_cert_file = "/vault/tls/ca.crt"
           }
           retry_join {
-              leader_api_addr = "https://${team}-1.${team}-internal.${ns}.svc.cluster.local:8200"
+              leader_api_addr = "https://tromso-1.tromso-internal.tromso-vault.svc.cluster.local:8200"
               leader_ca_cert_file = "/vault/tls/ca.crt"
           }
           retry_join {
-              leader_api_addr = "https://${team}-2.${team}-internal.${ns}.svc.cluster.local:8200"
+              leader_api_addr = "https://tromso-2.tromso-internal.tromso-vault.svc.cluster.local:8200"
               leader_ca_cert_file = "/vault/tls/ca.crt"
           }
         }
         seal "awskms" {
-          region = "${region}"
-          kms_key_id = "${kms_id}"
+          region = "us-west-2"
+          kms_key_id = "55eb1b9c-a534-4aa8-b327-4a160b9c2e01"
         }
         service_registration "kubernetes" {}
   serverTelemetry:

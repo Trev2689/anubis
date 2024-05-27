@@ -80,15 +80,15 @@ server:
         storage "raft" {
           path    = "/vault/data"
           retry_join {
-              leader_api_addr = "https://tromso-0.tromso-internal.tromso-vault.svc.cluster.local:8200"
+              leader_api_addr = "https://tromso-vault-0.tromso-vault-internal.tromso-vault.svc.cluster.local:8200"
               leader_ca_cert_file = "/vault/tls/ca.crt"
           }
           retry_join {
-              leader_api_addr = "https://tromso-1.tromso-internal.tromso-vault.svc.cluster.local:8200"
+              leader_api_addr = "https://tromso-vault-1.tromso-vault-internal.tromso-vault.svc.cluster.local:8200"
               leader_ca_cert_file = "/vault/tls/ca.crt"
           }
           retry_join {
-              leader_api_addr = "https://tromso-2.tromso-internal.tromso-vault.svc.cluster.local:8200"
+              leader_api_addr = "https://tromso-vault-2.tromso-vault-internal.tromso-vault.svc.cluster.local:8200"
               leader_ca_cert_file = "/vault/tls/ca.crt"
           }
         }

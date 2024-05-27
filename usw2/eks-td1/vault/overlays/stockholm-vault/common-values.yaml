@@ -1,0 +1,11 @@
+name: tromso-vault
+namespace: tromso-vault
+kms_key: anubis-t3-usw2-td1-tromso-vault-key20240430091914804100000003
+kms_key_id: f935fa51-c677-4828-9015-3af6eeeb12e9
+aws_region: us-west-2 
+iam_role: arn:aws:iam::997925851768:role/anubis-t3-usw2-mel-bacon-vault-role
+
+
+# name: "your-vault-name" # Example: team1
+# s3Bucket: "your-s3-bucket-name"
+# stackName: "your-stack-name" # Example: eks

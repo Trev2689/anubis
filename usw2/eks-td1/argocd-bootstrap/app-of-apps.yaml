@@ -1,1 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-bootstrap
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Trev2689/anubis.git'
+    targetRevision: HEAD
+    path: 'usw2/eks-td1/argocd-applications'  # Path to the directory containing ApplicationSets
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
 

@@ -94,7 +94,7 @@ server:
         }
         seal "awskms" {
           region = "us-west-2"
-          kms_key_id = "49788035-7054-4f7c-ba63-ab598a02ca05"
+          kms_key_id = "4c78b294-774f-4fa3-a059-c2576f27573c"
         }
         service_registration "kubernetes" {}
   serverTelemetry:

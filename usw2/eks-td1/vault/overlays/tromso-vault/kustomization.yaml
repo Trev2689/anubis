@@ -12,6 +12,7 @@ helmCharts:
     valuesFile: common-values.yaml
     releaseName: tromso-vault-anubis-resources
     namespace: june-vault  # Specify the namespace where you want to install the chart
+    directory: /charts/anubis-resources-$(date +%s)
   
 
 
@@ -21,3 +22,4 @@ helmCharts:
     valuesFile: vault-values.yaml
     releaseName: tromso
     namespace: tromso-vault
+    directory: /charts/vault-$(date +%s)

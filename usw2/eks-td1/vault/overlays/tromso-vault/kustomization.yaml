@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: tromso-vault
+
+resources:
+  - ../../base
+
+helmCharts:
+  - name: anubis-resources
+    version: 0.4.0  # Replace <version> with the version you want to install
+    repo: https://trev2689.github.io/helm-charts/
+    valuesFile: common-values.yaml
+    releaseName: tromso-vault-anubis-resources
+    namespace: june-vault  # Specify the namespace where you want to install the chart
+  
+
+
+  - name: vault
+    version: 0.27.0
+    repo: https://helm.releases.hashicorp.com
+    valuesFile: vault-values.yaml
+    releaseName: tromso
+    namespace: tromso-vault

@@ -12,7 +12,7 @@ server:
   volumes:
     - name: tls
       secret:
-        secretName: tromso-tls
+        secretName: tromso-vault-tls
     - name: bootstrap
       configMap:
         name: bootstrap

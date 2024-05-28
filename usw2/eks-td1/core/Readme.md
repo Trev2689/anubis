@@ -1,0 +1,1 @@
+This is the 'core' directory. Argocd will utilize an applicationset to install everything defined here as part of cluster bootstrapping. Apps here include traefik, kube-prometheus-stack, cert-manger, pca-issuer. 

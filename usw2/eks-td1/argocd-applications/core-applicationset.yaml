@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: core-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: 'https://github.com/Trev2689/anubis.git'
+        revision: HEAD
+        paths:
+          - usw2/eks-td1/core/overlays
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: anubis
+      source:
+        repoURL: 'https://github.com/Trev2689/anubis.git'
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - FailOnSharedResource=true

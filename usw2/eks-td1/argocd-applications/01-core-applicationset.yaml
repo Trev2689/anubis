@@ -8,8 +8,8 @@ spec:
     - git:
         repoURL: 'https://github.com/Trev2689/anubis.git'
         revision: HEAD
-        paths:
-          - usw2/eks-td1/core/overlays
+        directories:
+          - path: 'usw2/eks-td1/core/overlays'
   template:
     metadata:
       name: '{{path.basename}}'

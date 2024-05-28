@@ -3,3 +3,31 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+helmCharts:
+  - name: traefik
+    version: v26.1.0
+    repo: https://traefik.github.io/charts
+    releaseName: traefik
+    namespace: traefik
+    valuesFile: traefik-values.yaml
+
+  # - name: cert-manager
+  #   version: v1.14.2
+  #   repo: https://charts.jetstack.io
+  #   releaseName: cert-manager
+  #   namespace: cert-manager
+  #   valuesFile: cert-manager-values.yaml
+
+  # - name: aws-pca
+  #   version: v1.2.7
+  #   repo: https://cert-manager.github.io/aws-privateca-issuer
+  #   releaseName: aws-pca
+  #   namespace: aws-pca-issuer
+  #   valuesFile: pca-values.yaml
+
+  # - name: kube-prometheus-stack
+  #   version: v58.0.0
+  #   repo: https://prometheus-community.github.io/helm-charts
+  #   releaseName: kube-prometheus-stack
+  #   namespace: monitoring

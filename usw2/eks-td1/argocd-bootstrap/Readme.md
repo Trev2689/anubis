@@ -1,0 +1,1 @@
+This is the 'argocd-bootstrap' folder. This contains app-of-apps.yaml which once applied to the cluster in question, will act as a bootstrapper i.e setting off a chain of events, to first install the two applicationsets in 'argocd-applications' which respectively install core applications and vault instances. 

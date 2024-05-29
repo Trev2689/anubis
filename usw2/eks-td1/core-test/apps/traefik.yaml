@@ -7,14 +7,14 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    chart: traefik
+  sources:
+  - chart: traefik
     repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
     targetRevision: 26.1.0
     helm:
       releaseName: traefik
       valueFiles:
-      - ../values/traefik-values.yaml
+      - /values/traefik-values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik

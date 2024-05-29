@@ -14,7 +14,10 @@ spec:
     helm:
       releaseName: aws-pca
       valueFiles:
-        - $values/usw2/eks-td1/core-test/apps/values/aws-pca-values.yaml
+        - $values/usw2/eks-td1/core-test/apps/values/aws-pca-values.yaml  # Ensure the correct path
+  - repoURL: 'https://github.com/Trev2689/anubis.git'
+    targetRevision: HEAD
+    ref: values
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: aws-pca-issuer

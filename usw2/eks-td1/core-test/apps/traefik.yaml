@@ -7,7 +7,7 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
+  source:
   - chart: traefik
     repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
     targetRevision: 26.1.0

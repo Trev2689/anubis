@@ -1,0 +1,5 @@
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-aws-pca
+  create: true
+  name: aws-pca-aws-privateca-issuer

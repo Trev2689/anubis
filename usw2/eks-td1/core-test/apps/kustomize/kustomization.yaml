@@ -5,7 +5,7 @@ resources:
   - vault-issuer.yaml
 
 helmCharts:
-  - name: aws-pca
+  - name: aws-privateca-issuer
     version: v1.2.7
     repo: https://cert-manager.github.io/aws-privateca-issuer
     releaseName: aws-pca

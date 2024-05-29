@@ -16,7 +16,7 @@ spec:
       valueFiles:
         - $values/usw2/eks-td1/core-test/apps/values/traefik-values.yaml  # Ensure the correct path
   - repoURL: 'https://github.com/Trev2689/anubis.git'
-    targetRevision: master
+    targetRevision: HEAD
     ref: values
   destination:
     server: 'https://kubernetes.default.svc'

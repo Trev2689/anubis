@@ -7,8 +7,8 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: 'https://cert-manager.github.io/aws-privateca-issuer'
+  sources:
+  - repoURL: 'https://cert-manager.github.io/aws-privateca-issuer'
     targetRevision: 1.2.7
     chart: aws-privateca-issuer
     helm:

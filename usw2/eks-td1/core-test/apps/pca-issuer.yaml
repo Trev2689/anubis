@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://cert-manager.github.io/aws-privateca-issuer'
     targetRevision: 1.2.7
-    chart: aws-pca-issuer
+    chart: aws-privateca-issuer
     helm:
       releaseName: aws-pca
       valueFiles:

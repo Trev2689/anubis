@@ -10,6 +10,8 @@ spec:
         revision: HEAD
         directories:
           - path: 'usw2/eks-td1/vault/overlays/*-vault'
+  syncPolicy:
+    preserveResourcesOnDeletion: false
   template:
     metadata:
       name: '{{path.basename}}'
@@ -29,19 +31,19 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - FailOnSharedResource=true
-      hooks:
-        - name: post-sync-restart-pods
-          hookType: PostSync
-          manifest: |
-            apiVersion: batch/v1
-            kind: Job
-            metadata:
-              name: restart-pods-job
-            spec:
-              template:
-                spec:
-                  containers:
-                    - name: restart-pods-container
-                      image: kubectl:latest
-                      command: ["sh", "-c", "for ns in $(kubectl get namespaces -o=jsonpath='{.items[*].metadata.name}' | grep -E '.*-vault$'); do kubectl -n $ns get pods -l vault-active!=true -o=jsonpath='{.items[*].metadata.name}' | xargs -I{} kubectl -n $ns delete pod {}; kubectl -n $ns get pods -l vault-active=true -o=jsonpath='{.items[*].metadata.name}' | xargs -I{} kubectl -n $ns delete pod {}; done"]
-                  restartPolicy: Never
+      # hooks:
+      #   - name: post-sync-restart-pods
+      #     hookType: PostSync
+      #     manifest: |
+      #       apiVersion: batch/v1
+      #       kind: Job
+      #       metadata:
+      #         name: restart-pods-job
+      #       spec:
+      #         template:
+      #           spec:
+      #             containers:
+      #               - name: restart-pods-container
+      #                 image: kubectl:latest
+      #                 command: ["sh", "-c", "for ns in $(kubectl get namespaces -o=jsonpath='{.items[*].metadata.name}' | grep -E '.*-vault$'); do kubectl -n $ns get pods -l vault-active!=true -o=jsonpath='{.items[*].metadata.name}' | xargs -I{} kubectl -n $ns delete pod {}; kubectl -n $ns get pods -l vault-active=true -o=jsonpath='{.items[*].metadata.name}' | xargs -I{} kubectl -n $ns delete pod {}; done"]
+      #             restartPolicy: Never

@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: core-cluster-bootstrap
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
   project: anubis
   source:

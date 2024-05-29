@@ -8,10 +8,13 @@ metadata:
 spec:
   project: default
   source:
+    chart: traefik/traefik
+    repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
+    targetRevision: v26.1.0
     helm:
-      chart: traefik/traefik
-      repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
-      version: v26.1.0
+      releaseName: traefik
+      valueFiles:
+      - ../values/traefik-values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik
@@ -22,6 +25,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - FailOnSharedResource=true
-  helm:
-    valueFiles:
-      - ../values/traefik-values.yaml
+  # helm:
+  #   valueFiles:
+  #     - ../values/traefik-values.yaml

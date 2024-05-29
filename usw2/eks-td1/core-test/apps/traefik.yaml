@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: traefik
       valueFiles:
-        - apps/values/traefik-values.yaml  # Ensure the correct path
+        - traefik-values.yaml  # Ensure the correct path
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik

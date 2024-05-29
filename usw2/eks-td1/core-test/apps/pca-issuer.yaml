@@ -20,7 +20,7 @@ spec:
       ref: values
     - repoURL: 'https://github.com/Trev2689/anubis.git'
       targetRevision: HEAD
-      path: $values/usw2/eks-td1/core-test/apps/values/vault-issuer.yaml  # Path to pca-issuer.yaml in your Git repository
+      path: usw2/eks-td1/core-test/apps/values/vault-issuer.yaml  # Path to pca-issuer.yaml in your Git repository
   destination:
   destination:
     server: 'https://kubernetes.default.svc'

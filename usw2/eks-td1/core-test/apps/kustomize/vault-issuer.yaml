@@ -5,4 +5,3 @@ metadata:
 spec:
   arn: arn:aws:acm-pca:eu-west-1:997925851768:certificate-authority/afa42fb3-f231-4514-9ac1-13956e5279b9
   region: eu-west-1
-  serviceAccountName: aws-pca-aws-privateca-issuer

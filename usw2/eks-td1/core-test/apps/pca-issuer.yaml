@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-pca
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://cert-manager.github.io/aws-privateca-issuer'
+    targetRevision: 1.2.7
+    chart: aws-pca-issuer
+    helm:
+      releaseName: aws-pca
+      valueFiles:
+        - $values/usw2/eks-td1/core-test/apps/values/aws-pca-values.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: aws-pca-issuer
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true
+  hooks:
+    - name: wait-for-cert-manager
+      hookType: Sync
+      sync:
+        resources:
+          - group: apps
+            kind: Deployment
+            version: v1
+            resource: deployments
+            namespace: cert-manager
+            waitFor:
+              - condition: Available
+                timeout: 500s
+    - name: create-cluster-issuer
+      hookType: PostSync
+      manifest: |
+        apiVersion: awspca.cert-manager.io/v1beta1
+        kind: AWSPCAClusterIssuer
+        metadata:
+          name: vault-issuer
+        spec:
+          arn: arn:aws:acm-pca:eu-west-1:997925851768:certificate-authority/afa42fb3-f231-4514-9ac1-13956e5279b9
+          region: eu-west-1
+          serviceAccountName: aws-pca-aws-privateca-issuer

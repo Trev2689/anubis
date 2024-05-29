@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: core-cluster-bootstrap
+  namespace: argocd
+spec:
+  project: anubis
+  source:
+    repoURL: 'https://github.com/Trev2689/anubis.git'
+    targetRevision: HEAD
+    path: 'usw2/eks-td1/core-test/apps'  # Path to the directory containing ApplicationS
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -10,7 +10,7 @@ spec:
   source:
     chart: traefik/traefik
     repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
-    targetRevision: v26.1.0
+    targetRevision: 26.1.0
     helm:
       releaseName: traefik
       valueFiles:

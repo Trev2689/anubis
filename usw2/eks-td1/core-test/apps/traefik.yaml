@@ -10,7 +10,7 @@ spec:
   source:
     helm:
       chart: traefik/traefik
-      repoURL: 'https://traefik.github.io/charts'
+      repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
       version: v26.1.0
   destination:
     server: 'https://kubernetes.default.svc'

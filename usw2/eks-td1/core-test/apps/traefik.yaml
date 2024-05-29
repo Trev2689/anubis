@@ -8,13 +8,13 @@ metadata:
 spec:
   project: default
   source:
+    repoURL: 'https://traefik.github.io/charts'
+    targetRevision: v26.1.0
     chart: traefik
-    repoURL: 'https://traefik.github.io/charts'  # Make sure to provide the correct repoURL
-    targetRevision: 26.1.0
     helm:
       releaseName: traefik
       valueFiles:
-      - apps/values/traefik-values.yaml
+        - apps/values/traefik-values.yaml  # Ensure the correct path
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik

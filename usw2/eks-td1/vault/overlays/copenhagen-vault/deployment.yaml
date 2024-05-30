@@ -13,8 +13,8 @@ spec:
       labels:
         app: controller-revision-monitor
     spec:
+      serviceAccountName: vault-updater
       containers:
-        serviceAccountName: vault-updater
       - name: controller-revision-monitor
         image: bitnami/kubectl:latest
         command: ["/bin/bash", "-c"]

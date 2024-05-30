@@ -3,6 +3,9 @@ kind: Job
 metadata:
   name: vault-updater-job
   namespace: copenhagen-vault
+  annotations:
+    argocd.argoproj.io/sync-options: |
+      {"status": "Ignore"}
 spec:
   template:
     metadata:

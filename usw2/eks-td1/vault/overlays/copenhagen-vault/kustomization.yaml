@@ -4,8 +4,9 @@ namespace: copenhagen-vault
 
 resources:
   - vault-updater-sa.yaml
+  - updater-job.yaml
   - configmap.yaml
-  - deployment.yaml
+  # - deployment.yaml
   - ../../base
 
 helmCharts:

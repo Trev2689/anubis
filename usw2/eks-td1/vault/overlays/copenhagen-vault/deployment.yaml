@@ -14,6 +14,7 @@ spec:
         app: controller-revision-monitor
     spec:
       containers:
+        serviceAccountName: vault-updater
       - name: controller-revision-monitor
         image: bitnami/kubectl:latest
         command: ["/bin/bash", "-c"]

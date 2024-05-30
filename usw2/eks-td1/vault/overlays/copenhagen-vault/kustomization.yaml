@@ -3,6 +3,8 @@ kind: Kustomization
 namespace: copenhagen-vault
 
 resources:
+  - configmap.yaml
+  - deployment.yaml
   - ../../base
 
 helmCharts:

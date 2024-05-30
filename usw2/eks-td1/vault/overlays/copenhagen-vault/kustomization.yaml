@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: copenhagen-vault
 
 resources:
+  - vault-updater-sa.yaml
   - configmap.yaml
   - deployment.yaml
   - ../../base

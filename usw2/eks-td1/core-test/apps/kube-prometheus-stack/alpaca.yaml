@@ -1,13 +1,19 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: create-cabundle-configmap
-  namespace: default
+  namespace: monitoring
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: create-cabundle-configmap
+  namespace: monitoring
 rules:
 - apiGroups: [""]
   resources: ["configmaps"]
@@ -20,7 +26,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: create-cabundle-configmap
-  namespace: default
+  namespace: monitoring
 roleRef:
   kind: Role
   name: create-cabundle-configmap
@@ -30,6 +36,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: create-cabundle-configmap-job
+  namespace: monitoring
 spec:
   template:
     spec:

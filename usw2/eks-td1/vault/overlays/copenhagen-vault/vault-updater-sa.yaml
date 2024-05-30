@@ -10,20 +10,9 @@ kind: ClusterRole
 metadata:
   name: list-controller-revisions-delete-pods
 rules:
-- apiGroups:
-  - apps
-  resources:
-  - controllerrevisions
-  verbs:
-  - list
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  verbs:
-  - list
-  - get
-  - delete
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
 
 ---
 

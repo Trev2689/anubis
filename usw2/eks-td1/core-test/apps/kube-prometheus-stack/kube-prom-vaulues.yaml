@@ -1,0 +1,40 @@
+prometheus:
+  prometheusSpec:
+    externalLabels:
+      clustername: anubis-t3-usw2-td1-eks
+      platform_role: vault
+      wd_dc_physical: us-west-2
+      wd_env_logical: devtest
+      wd_env_physical: devtest
+      wd_logical: devtest
+      wd_logical_type: global
+      wd_owner: security-tools-devops
+      wd_platform: aws
+      wd_platform_provider: aws
+      wd_service: vault-anubis
+    logLevel: info
+    remoteWrite:
+    - headers:
+        X-Scope-OrgID: default
+      queueConfig:
+        batchSendDeadline: 20s
+        capacity: 7500
+        maxBackoff: 20s
+        maxSamplesPerSend: 2500
+        maxShards: 50
+        minBackoff: 1s
+        minShards: 2
+      tlsConfig:
+        caFile: /alpaca-root-certs/cabundle/ca-bundle.crt
+        insecureSkipVerify: true
+      url: https://api-ingestion.dev.wdpharos.io/api/v1/push
+    retention: 12h
+    scrapeInterval: 1m
+    volumeMounts:
+    - mountPath: alpaca-root-certs/cabundle
+      name: alpaca-root-certs
+      readOnly: true
+    volumes:
+    - configMap:
+        name: cabundle
+      name: alpaca-root-certs

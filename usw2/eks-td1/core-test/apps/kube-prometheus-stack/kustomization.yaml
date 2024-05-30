@@ -1,1 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 
+resources:
+  - alpaca.yaml
+
+helmCharts:
+  - name: prometheus-community/kube-prometheus-stack
+    version: v58.0.0
+    repo: https://prometheus-community.github.io/helm-charts
+    releaseName: kube-prometheus-stack
+    namespace: monitoring
+    valuesFile: kube-prom-values.yaml

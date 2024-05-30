@@ -12,7 +12,7 @@ spec:
       serviceAccountName: vault-updater
       containers:
       - name: vault-updater-container
-        image: bitnami/bitnami-shell
+        image: bitnami/kubectl
         command: ["/bin/bash", "-c"]
         args:
         - |

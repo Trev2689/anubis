@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/Trev2689/anubis.git'
     targetRevision: HEAD
-    path: usw2/eks-td1/core-test/apps/kustomize
+    path: usw2/eks-td1/core-test/apps/aws-pca
   #     chart: aws-privateca-issuer
   #     helm:
   #       releaseName: aws-pca

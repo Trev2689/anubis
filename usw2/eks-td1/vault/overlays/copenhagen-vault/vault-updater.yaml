@@ -1,4 +1,10 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: copenhagen-vault
+
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: controller-revision-monitor-script

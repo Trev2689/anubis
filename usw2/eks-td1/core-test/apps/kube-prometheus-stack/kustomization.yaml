@@ -12,3 +12,5 @@ helmCharts:
     namespace: monitoring
     valuesFile: kube-prom-values.yaml
     includeCRDs: true
+patches:
+  - patch-annotations.yaml

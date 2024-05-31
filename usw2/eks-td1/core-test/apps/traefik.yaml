@@ -6,7 +6,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: anubis
   source:
     repoURL: 'https://traefik.github.io/charts'
     targetRevision: v28.1.0
@@ -22,11 +22,6 @@ spec:
             nodePort: 32443
         service:
           type: NodePort
-  #     valueFiles:
-  #       - $values/usw2/eks-td1/core-test/apps/values/traefik-values.yaml  # Ensure the correct path
-  # - repoURL: 'https://github.com/Trev2689/anubis.git'
-  #   targetRevision: HEAD
-  #   ref: values
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik
@@ -37,6 +32,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - FailOnSharedResource=true
-  # helm:
-  #   valueFiles:
-  #     - ../values/traefik-values.yaml

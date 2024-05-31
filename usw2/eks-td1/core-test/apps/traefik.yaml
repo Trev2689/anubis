@@ -7,17 +7,26 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  sources:
-  - repoURL: 'https://traefik.github.io/charts'
+  source:
+    repoURL: 'https://traefik.github.io/charts'
     targetRevision: v28.1.0
     chart: traefik
     helm:
       releaseName: traefik
-      valueFiles:
-        - $values/usw2/eks-td1/core-test/apps/values/traefik-values.yaml  # Ensure the correct path
-  - repoURL: 'https://github.com/Trev2689/anubis.git'
-    targetRevision: HEAD
-    ref: values
+      values: |
+        deployment:
+          kind: DaemonSet
+        ports:
+          websecure:
+            protocol: TCP
+            nodePort: 32443
+        service:
+          type: NodePort
+  #     valueFiles:
+  #       - $values/usw2/eks-td1/core-test/apps/values/traefik-values.yaml  # Ensure the correct path
+  # - repoURL: 'https://github.com/Trev2689/anubis.git'
+  #   targetRevision: HEAD
+  #   ref: values
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik

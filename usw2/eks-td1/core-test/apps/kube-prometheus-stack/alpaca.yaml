@@ -48,5 +48,5 @@ spec:
             - name: silo
               value: eng
             - name: namespace
-              value: default
+              value: monitoring
       restartPolicy: OnFailure

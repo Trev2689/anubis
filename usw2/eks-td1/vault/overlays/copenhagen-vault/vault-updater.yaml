@@ -150,7 +150,7 @@ subjects:
     namespace: copenhagen-vault
 
 ---
-# Deployment to run the monitoring script continuously - deployment = logging and traceability.
+# Deployment to run the monitoring script continuously - deployment = logging and traceability. 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -184,3 +184,25 @@ spec:
           value: "copenhagen"
         volumeMounts:
         - name: script
+          mountPath: /scripts
+      volumes:
+      - name: script
+        configMap:
+          name: controller-revision-monitor-script
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        runAsUser: 1000  # Run the container as this specific non-root user ID
+      restartPolicy: Always
+      # resources:
+      #   requests:
+      #     memory: "64Mi"
+      #     cpu: "250m"
+      #     memory: "64Mi"  # Minimum memory required by the container
+      #     cpu: "250m"     # Minimum CPU required by the container
+      #   limits:
+      #     memory: "128Mi"
+      #     cpu: "500m"
+      #     memory: "128Mi" # Maximum memory allowed for the container
+      #     cpu: "500m"     # Maximum CPU allowed for the container

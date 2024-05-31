@@ -3,10 +3,10 @@ kind: Kustomization
 namespace: copenhagen-vault
 
 resources:
-  - vault-updater-sa.yaml
+  # - vault-updater-sa.yaml
   # - updater-job.yaml
-  - configmap.yaml
-  - deployment.yaml
+  # - configmap.yaml
+  # - deployment.yaml
   - ../../base
 
 helmCharts:

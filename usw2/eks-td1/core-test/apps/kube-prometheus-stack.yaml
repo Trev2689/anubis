@@ -13,7 +13,7 @@ spec:
     path: usw2/eks-td1/core-test/apps/kube-prometheus-stack
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: aws-pca-issuer
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true

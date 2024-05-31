@@ -190,10 +190,7 @@ spec:
         configMap:
           name: controller-revision-monitor-script
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 3000
-        fsGroup: 2000
-        runAsUser: 1000  # Run the container as this specific non-root user ID
+        runAsUser: 1000  # non-root user ID
       restartPolicy: Always
       # resources:
       #   requests:

@@ -70,7 +70,8 @@ data:
         if ! compare_controller_revisions "$previous_revisions" "$current_revisions" >/dev/null; then
           echo "ControllerRevision change detected"
           restart_statefulset
-          echo "Pods restarted successfully with ControllerRevision ID: $(kubectl get controllerrevision -n $NAMESPACE -l "app.kubernetes.io/instance=$NAME,app.kubernetes.io/name=vault" -o json | jq -r '.items[] | .metadata.name')"
+          local latest_revision=$(kubectl get controllerrevision -n $NAMESPACE -l "app.kubernetes.io/instance=$NAME,app.kubernetes.io/name=vault" -o json | jq -r '.items | sort_by(.metadata.creationTimestamp) | last | .metadata.name')
+          echo "Pods restarted successfully with latest ControllerRevision ID: $latest_revision"
           echo "Monitoring controller revisions..."
           previous_revisions="$current_revisions"
         fi

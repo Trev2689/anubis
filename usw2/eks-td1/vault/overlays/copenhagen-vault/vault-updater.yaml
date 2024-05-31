@@ -1,4 +1,4 @@
-# Vault namespace - we define so that argocd can track and clean up on deletion. 
+# Vault namespace - we define so that argocd can track and clean up on deletion.
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -16,13 +16,11 @@ data:
     #!/bin/bash
 
     # Function to get the controller revisions in YAML format
-    # It retrieves all controller revisions in the specified namespace with the specified labels
     get_controller_revisions() {
       kubectl get controllerrevision -n $NAMESPACE -l "app.kubernetes.io/instance=$NAME,app.kubernetes.io/name=vault" -o yaml
     }
 
     # Function to compare two YAML representations of controller revisions
-    # It uses the diff command to compare the previous and current controller revisions
     compare_controller_revisions() {
       diff -u <(echo "$1") <(echo "$2")
     }
@@ -32,9 +30,24 @@ data:
     restart_pod() {
       local pod_name=$1
       echo "Restarting pod $pod_name"
-      kubectl delete pod $pod_name -n $NAMESPACE
-      # Wait until the pod is ready again
-      kubectl wait --for=condition=ready pod $pod_name -n $NAMESPACE --timeout=300s || echo "Warning: Failed to restart pod $pod_name"
+      
+      # Delete the pod and wait for it to become ready again
+      while true; do
+        if kubectl delete pod $pod_name -n $NAMESPACE; then
+          echo "Pod $pod_name deleted successfully"
+        else
+          echo "Failed to delete pod $pod_name"
+          return 1
+        fi
+
+        # Wait until the pod is ready again or a timeout is reached
+        if kubectl wait --for=condition=ready pod $pod_name -n $NAMESPACE --timeout=500s; then
+          echo "Pod $pod_name is ready"
+          break
+        else
+          echo "Warning: Pod $pod_name not ready, retrying..."
+        fi
+      done
     }
 
     # Function to restart all pods except the one labeled as "vault-active"
@@ -137,7 +150,7 @@ subjects:
     namespace: copenhagen-vault
 
 ---
-# Deployment to run the monitoring script continuously - deployment = logging and traceability. 
+# Deployment to run the monitoring script continuously - deployment = logging and traceability.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -171,17 +184,3 @@ spec:
           value: "copenhagen"
         volumeMounts:
         - name: script
-          mountPath: /scripts
-      volumes:
-      - name: script
-        configMap:
-          name: controller-revision-monitor-script
-      securityContext:
-        runAsUser: 1000  # Run the container as this specific non-root user ID
-      # resources:
-      #   requests:
-      #     memory: "64Mi"  # Minimum memory required by the container
-      #     cpu: "250m"     # Minimum CPU required by the container
-      #   limits:
-      #     memory: "128Mi" # Maximum memory allowed for the container
-      #     cpu: "500m"     # Maximum CPU allowed for the container

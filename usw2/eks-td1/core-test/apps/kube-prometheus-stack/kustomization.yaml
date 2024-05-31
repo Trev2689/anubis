@@ -13,5 +13,5 @@ helmCharts:
     valuesFile: kube-prom-values.yaml
     includeCRDs: true
 
-patchesStrategicMerge:
-  - patch-annotations.yaml
+# patchesStrategicMerge:
+#   - patch-annotations.yaml

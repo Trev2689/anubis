@@ -157,10 +157,10 @@ spec:
         runAsUser: 1000
         runAsGroup: 3000
         fsGroup: 2000
-      resources:
-        requests:
-          memory: "64Mi"
-          cpu: "250m"
-        limits:
-          memory: "128Mi"
-          cpu: "500m"
+      # resources:
+      #   requests:
+      #     memory: "64Mi"
+      #     cpu: "250m"
+      #   limits:
+      #     memory: "128Mi"
+      #     cpu: "500m"

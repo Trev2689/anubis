@@ -11,3 +11,4 @@ helmCharts:
     releaseName: aws-pca
     namespace: aws-pca-issuer
     valuesFile: pca-values.yaml
+    includeCRDs: true

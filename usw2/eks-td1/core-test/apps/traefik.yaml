@@ -18,9 +18,9 @@ spec:
           kind: DaemonSet
         core:
           defaultRuleSyntax: v3
-        logs:
-          access:
-            enabled: true
+        # logs:
+        #   access:
+        #     enabled: true
         ports:
           websecure:
             protocol: TCP

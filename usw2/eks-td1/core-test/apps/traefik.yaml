@@ -14,9 +14,6 @@ spec:
     helm:
       releaseName: traefik
       values: |
-        global:
-          # Send anonymous usage data
-          sendAnonymousUsage: false
         deployment:
           kind: DaemonSet
         core:

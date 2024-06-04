@@ -17,7 +17,7 @@ spec:
         deployment:
           kind: DaemonSet
         core:
-          defaultRuleSyntax: v2
+          defaultRuleSyntax: v3
         ports:
           websecure:
             protocol: TCP

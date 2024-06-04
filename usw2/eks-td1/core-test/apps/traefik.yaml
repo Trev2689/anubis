@@ -21,6 +21,9 @@ spec:
         # logs:
         #   access:
         #     enabled: true
+        globalArguments:
+          - "--global.checknewversion"
+          - "--global.sendanonymoususage=false"
         ports:
           websecure:
             protocol: TCP

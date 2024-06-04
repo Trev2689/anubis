@@ -6,7 +6,7 @@ resources:
 
 helmCharts:
   - name: kube-prometheus-stack
-    version: v58.0.1
+    version: v59.1.0
     repo: https://prometheus-community.github.io/helm-charts
     releaseName: kube-prometheus-stack
     namespace: monitoring

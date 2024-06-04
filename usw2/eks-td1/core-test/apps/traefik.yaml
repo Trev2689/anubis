@@ -16,14 +16,14 @@ spec:
       values: |
         deployment:
           kind: DaemonSet
+        core:
+          defaultRuleSyntax: v2
         ports:
           websecure:
             protocol: TCP
             nodePort: 32443
         service:
           type: NodePort
-        core:
-          defaultRuleSyntax: v2
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik

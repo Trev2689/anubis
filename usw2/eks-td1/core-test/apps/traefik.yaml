@@ -9,7 +9,7 @@ spec:
   project: anubis
   source:
     repoURL: 'https://traefik.github.io/charts'
-    targetRevision: v28.1.0
+    targetRevision: v28.2.0
     chart: traefik
     helm:
       releaseName: traefik

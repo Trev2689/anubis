@@ -3,6 +3,6 @@ namespace: tromso-vault
 kms_key: anubis-t3-usw2-td1-tromso-vault-key20240430091914804100000003
 kms_key_id: 55eb1b9c-a534-4aa8-b327-4a160b9c2e01
 aws_region: us-west-2 
-iam_role: arn:aws:iam::997925851768:role/anubis-t3-usw2-mel-bacon-vault-role
+iam_role: arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-tromso-vault-role
 s3Bucket: "wd-997925851768-anubis-bkp-usw2/"
 stackName: "anubis-t3-usw2-td1-eks"

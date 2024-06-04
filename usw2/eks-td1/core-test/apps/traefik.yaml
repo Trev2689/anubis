@@ -18,6 +18,8 @@ spec:
           kind: DaemonSet
         core:
           defaultRuleSyntax: v3
+        logs:
+          access: true
         ports:
           websecure:
             protocol: TCP

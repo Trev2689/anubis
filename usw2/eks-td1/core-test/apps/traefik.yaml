@@ -19,7 +19,8 @@ spec:
         core:
           defaultRuleSyntax: v3
         logs:
-          access: true
+          access:
+            enabled: true
         ports:
           websecure:
             protocol: TCP

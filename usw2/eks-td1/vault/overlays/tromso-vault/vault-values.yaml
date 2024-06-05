@@ -97,6 +97,6 @@ server:
           kms_key_id = "55eb1b9c-a534-4aa8-b327-4a160b9c2e01"
         }
         service_registration "kubernetes" {}
-  serverTelemetry:
-    serviceMonitor:
-      enabled: true #Relies on Kube-Prometheus-Stack being installed, vault will fail installation if not present as its crd.
+  # serverTelemetry:
+  #   serviceMonitor:
+  #     enabled: true #Relies on Kube-Prometheus-Stack being installed, vault will fail installation if not present as its crd.

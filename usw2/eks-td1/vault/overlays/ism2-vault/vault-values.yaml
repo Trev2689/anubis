@@ -12,7 +12,7 @@ server:
   volumes:
     - name: tls
       secret:
-        secretName: copenhagen-vault-tls
+        secretName: ism2-vault-tls
     - name: bootstrap
       configMap:
         name: bootstrap
@@ -60,9 +60,9 @@ server:
   service:
       enabled: true 
       clusterIP: None 
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-copenhagen-vault-role"
+  # serviceAccount:
+  #   annotations:
+  #     eks.amazonaws.com/role-arn: "arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-copenhagen-vault-role"
   ha:
     enabled: true
     raft:

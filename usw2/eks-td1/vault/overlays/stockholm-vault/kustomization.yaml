@@ -7,7 +7,7 @@ resources:
 
 helmCharts:
   - name: anubis-resources
-    version: 0.11.0
+    version: 0.13.0
     repo: https://trev2689.github.io/helm-charts/
     valuesFile: common-values.yaml
     releaseName: stockholm-vault-anubis-resources

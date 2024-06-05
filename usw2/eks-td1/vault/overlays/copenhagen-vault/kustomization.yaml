@@ -3,16 +3,11 @@ kind: Kustomization
 namespace: copenhagen-vault
 
 resources:
-  # - vault-updater-sa.yaml
-  # - updater-job.yaml
-  # - configmap.yaml
-  # - deployment.yaml
-  # - vault-updater.yaml
   - ../../base
 
 helmCharts:
   - name: anubis-resources
-    version: 0.11.0
+    version: 0.12.0
     repo: https://trev2689.github.io/helm-charts/
     valuesFile: common-values.yaml
     releaseName: copenhagen-vault-anubis-resources

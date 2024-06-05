@@ -6,3 +6,4 @@ aws_region: us-west-2
 iam_role: arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-stockholm-vault-role
 s3Bucket: "wd-997925851768-anubis-bkp-usw2/"
 stackName: "anubis-t3-usw2-td1-eks"
+automated_upgrade: false

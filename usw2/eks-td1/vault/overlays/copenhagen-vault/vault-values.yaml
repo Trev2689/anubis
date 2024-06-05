@@ -17,12 +17,19 @@ server:
       configMap:
         name: bootstrap
         defaultMode: 0555 #Translates to read and execute only -r-xr-xr-x 
+    - name: alpaca-root-certs
+      configMap:
+        name: cabundle
   volumeMounts:
     - name: tls
       mountPath: "/vault/tls"
       readOnly: true
     - name: bootstrap
       mountPath: "/vault/bootstrap"
+    - name: alpaca-root-certs
+      mountPath: /etc/ssl/certs/cabundle.crt
+      subPath: cabundle.crt
+      readOnly: true
   extraContainers:
     - name: vault-cert-watcher
       image: docker.io/trev2689/vault-cert-reloader:1.2

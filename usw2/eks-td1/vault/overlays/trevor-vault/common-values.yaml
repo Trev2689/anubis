@@ -1,0 +1,9 @@
+name: trevor
+namespace: trevor-vault
+kms_key: dummy
+kms_key_id: dummy
+aws_region: us-west-2 
+iam_role: arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-trevor-vault-role
+s3Bucket: "dummy"
+stackName: "anubis-t3-usw2-td1-eks"
+automated_upgrade: false

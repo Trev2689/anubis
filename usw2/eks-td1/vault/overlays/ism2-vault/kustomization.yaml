@@ -7,7 +7,7 @@ resources:
 
 helmCharts:
   - name: anubis-resources
-    version: 0.16.0
+    version: 0.17.0
     repo: https://trev2689.github.io/helm-charts/
     valuesFile: common-values.yaml
     releaseName: ism2-vault-anubis-resources

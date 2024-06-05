@@ -31,7 +31,7 @@ server:
       mountPath: "/vault/bootstrap"
     - name: alpaca-root-certs
       mountPath: /etc/ssl/certs/cabundle.crt
-      subPath: cabundle.crt
+      subPath: ca-bundle.crt
       readOnly: true
   extraContainers:
     - name: vault-cert-watcher

@@ -5,43 +5,43 @@ global:
 injector:
   enabled: false
 server:
-  # extraEnvironmentVars:
-  #   VAULT_CACERT: /vault/tls/ca.crt
-  #   VAULT_TLSCERT: /vault/tls/tls.crt
-  #   VAULT_TLSKEY: /vault/tls/tls.key
-  # volumes:
-  #   - name: tls
-  #     secret:
-  #       secretName: copenhagen-vault-tls
-  #   - name: bootstrap
-  #     configMap:
-  #       name: bootstrap
-  #       defaultMode: 0555 #Translates to read and execute only -r-xr-xr-x 
-  #   - name: alpaca-root-certs
-  #     configMap:
-  #       name: cabundle
-  #       items:
-  #       - key: ca-bundle.crt
-  #         path: ca-bundle.crt
+  extraEnvironmentVars:
+    VAULT_CACERT: /vault/tls/ca.crt
+    VAULT_TLSCERT: /vault/tls/tls.crt
+    VAULT_TLSKEY: /vault/tls/tls.key
+  volumes:
+    - name: tls
+      secret:
+        secretName: copenhagen-vault-tls
+    - name: bootstrap
+      configMap:
+        name: bootstrap
+        defaultMode: 0555 #Translates to read and execute only -r-xr-xr-x 
+    - name: alpaca-root-certs
+      configMap:
+        name: cabundle
+        items:
+        - key: ca-bundle.crt
+          path: ca-bundle.crt
   volumeMounts:
-    # - name: tls
-    #   mountPath: "/vault/tls"
-    #   readOnly: true
-    # - name: bootstrap
-    #   mountPath: "/vault/bootstrap"
-    # - name: alpaca-root-certs
-    #   mountPath: /etc/ssl/certs/cabundle.crt
-    #   subPath: ca-bundle.crt
-    #   readOnly: true
-  # extraContainers:
-  #   - name: vault-cert-watcher
-  #     image: docker.io/trev2689/vault-cert-reloader:1.2
-  #     args:
-  #       - /vault/tls/tls.crt
-  #     volumeMounts:
-  #       - name: tls
-  #         mountPath: "/vault/tls"
-  #         readOnly: true
+    - name: tls
+      mountPath: "/vault/tls"
+      readOnly: true
+    - name: bootstrap
+      mountPath: "/vault/bootstrap"
+    - name: alpaca-root-certs
+      mountPath: /etc/ssl/certs/cabundle.crt
+      subPath: ca-bundle.crt
+      readOnly: true
+  extraContainers:
+    - name: vault-cert-watcher
+      image: docker.io/trev2689/vault-cert-reloader:1.2
+      args:
+        - /vault/tls/tls.crt
+      volumeMounts:
+        - name: tls
+          mountPath: "/vault/tls"
+          readOnly: true
   # shareProcessNamespace enables process namespace sharing between Vault and the extraContainers
   # This is useful if Vault must be signaled, e.g. to send a SIGHUP for a log rotation - we are taking advantage of this with extra container vault-cert-reloader to send sighup when certs change. 
   shareProcessNamespace: true

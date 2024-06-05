@@ -20,6 +20,9 @@ server:
     - name: alpaca-root-certs
       configMap:
         name: cabundle
+        items:
+        - key: ca-bundle.crt
+          path: ca-bundle.crt
   volumeMounts:
     - name: tls
       mountPath: "/vault/tls"

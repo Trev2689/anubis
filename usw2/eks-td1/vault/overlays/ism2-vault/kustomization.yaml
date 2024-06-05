@@ -6,17 +6,17 @@ resources:
   - ../../base
 
 helmCharts:
-  # - name: anubis-resources
-  #   version: 0.15.0
-  #   repo: https://trev2689.github.io/helm-charts/
-  #   valuesFile: common-values.yaml
-  #   releaseName: ism2-vault-anubis-resources
-  #   namespace: ism2-vault
+  - name: anubis-resources
+    version: 0.16.0
+    repo: https://trev2689.github.io/helm-charts/
+    valuesFile: common-values.yaml
+    releaseName: ism2-vault-anubis-resources
+    namespace: ism2-vault
   
 
 
   - name: vault
-    version: 0.27.0
+    version: 0.28.0
     repo: https://helm.releases.hashicorp.com
     valuesFile: vault-values.yaml
     releaseName: ism2

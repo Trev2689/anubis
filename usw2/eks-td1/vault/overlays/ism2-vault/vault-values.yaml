@@ -1,0 +1,112 @@
+global:
+  serverTelemetry:
+    prometheusOperator: true
+  tlsDisable: false
+injector:
+  enabled: false
+server:
+  extraEnvironmentVars:
+    VAULT_CACERT: /vault/tls/ca.crt
+    VAULT_TLSCERT: /vault/tls/tls.crt
+    VAULT_TLSKEY: /vault/tls/tls.key
+  volumes:
+    - name: tls
+      secret:
+        secretName: copenhagen-vault-tls
+    - name: bootstrap
+      configMap:
+        name: bootstrap
+        defaultMode: 0555 #Translates to read and execute only -r-xr-xr-x 
+    - name: alpaca-root-certs
+      configMap:
+        name: cabundle
+        items:
+        - key: ca-bundle.crt
+          path: ca-bundle.crt
+  volumeMounts:
+    - name: tls
+      mountPath: "/vault/tls"
+      readOnly: true
+    - name: bootstrap
+      mountPath: "/vault/bootstrap"
+    - name: alpaca-root-certs
+      mountPath: /etc/ssl/certs/cabundle.crt
+      subPath: ca-bundle.crt
+      readOnly: true
+  extraContainers:
+    - name: vault-cert-watcher
+      image: docker.io/trev2689/vault-cert-reloader:1.2
+      args:
+        - /vault/tls/tls.crt
+      volumeMounts:
+        - name: tls
+          mountPath: "/vault/tls"
+          readOnly: true
+  # shareProcessNamespace enables process namespace sharing between Vault and the extraContainers
+  # This is useful if Vault must be signaled, e.g. to send a SIGHUP for a log rotation - we are taking advantage of this with extra container vault-cert-reloader to send sighup when certs change. 
+  shareProcessNamespace: true
+  readinessProbe:
+      enabled: true
+      path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
+  livenessProbe:
+    enabled: true
+    path: "/v1/sys/health?standbyok=true"
+    initialDelaySeconds: 60
+  # postStart:
+  #   - "/bin/sh"
+  #   - "-c"
+  #   - "sleep 5 && /vault/bootstrap/bootstrap.sh > /tmp/bootstrap.log"
+  logLevel: "debug"
+  service:
+      enabled: true 
+      clusterIP: None 
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::997925851768:role/anubis-t3-usw2-td1-copenhagen-vault-role"
+  ha:
+    enabled: true
+    raft:
+      enabled: true
+      setNodeId: true
+      config: |
+        ui = true
+        disable_mlock = true
+        listener "tcp" {
+          tls_disable = false
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+          tls_cert_file = "/vault/tls/tls.crt"
+          tls_key_file  = "/vault/tls/tls.key"
+          tls_client_ca_file = "/vault/tls/ca.crt"
+          # Enable unauthenticated metrics access for Prometheus Operator
+          telemetry {
+            unauthenticated_metrics_access = "true"
+          }
+        }
+        telemetry {
+          prometheus_retention_time = "30m"
+          disable_hostname = true
+        }
+        storage "raft" {
+          path    = "/vault/data"
+          retry_join {
+              leader_api_addr = "https://ism2-vault-0.ism2-vault-internal.ism2-vault.svc.cluster.local:8200"
+              leader_ca_cert_file = "/vault/tls/ca.crt"
+          }
+          retry_join {
+              leader_api_addr = "https://ism2-vault-1.ism2-vault-internal.ism2-vault.svc.cluster.local:8200"
+              leader_ca_cert_file = "/vault/tls/ca.crt"
+          }
+          retry_join {
+              leader_api_addr = "https://ism2-vault-2.ism2-vault-internal.ism2-vault.svc.cluster.local:8200"
+              leader_ca_cert_file = "/vault/tls/ca.crt"
+          }
+        }
+        # seal "awskms" {
+        #   region = "us-west-2"
+        #   kms_key_id = "49788035-7054-4f7c-ba63-ab598a02ca05"
+        # }
+        service_registration "kubernetes" {}
+  serverTelemetry:
+    serviceMonitor:
+      enabled: true #Relies on Kube-Prometheus-Stack being installed, vault will fail installation if not present as its crd.

@@ -23,4 +23,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - FailOnSharedResource=true
-      - ServerSideApply=true
+      # - ServerSideApply=true
+  ignoreDifferences:
+  - group: monitoring.coreos.com
+    kind: ServiceMonitor
+    jqPathExpressions:
+    - .spec.endpoints[]?.relabelings[]?.action
